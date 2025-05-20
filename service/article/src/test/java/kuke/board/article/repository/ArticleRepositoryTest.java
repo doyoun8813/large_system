@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @Slf4j
 @SpringBootTest
 class ArticleRepositoryTest {
@@ -25,10 +23,25 @@ class ArticleRepositoryTest {
             log.info("article = {}", article);
         }
     }
+
     @Test
     void countTest() {
         Long count = articleRepository.count(1L, 10000L);
         log.info("count = {}", count);
+    }
+
+    @Test
+    void findInfiniteScrollTest(){
+        List<Article> articles = articleRepository.findAllInfiniteScroll(1L, 30L);
+        for (Article article : articles) {
+            log.info("articleId = {}", article.getArticleId());
+        }
+
+        Long lastArticleId = articles.getLast().getArticleId();
+        List<Article> articles2 = articleRepository.findAllInfiniteScroll(1L, 30L, lastArticleId);
+        for (Article article : articles2) {
+            log.info("articleId = {}", article.getArticleId());
+        }
     }
 
 }
