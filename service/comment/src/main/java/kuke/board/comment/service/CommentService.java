@@ -57,7 +57,7 @@ public class CommentService {
         commentRepository.findById(commentId)
                 .filter(Predicate.not(Comment::getDeleted))
                 .ifPresent(comment -> {
-                    if(hashChildren(comment)) {
+                    if(hasChildren(comment)) {
                         comment.delete();
                     } else {
                         delete(comment);
@@ -70,13 +70,13 @@ public class CommentService {
         if(!comment.isRoot()) {
             commentRepository.findById(comment.getParentCommentId())
                     .filter(Comment::getDeleted)
-                    .filter(Predicate.not(this::hashChildren))
+                    .filter(Predicate.not(this::hasChildren))
                     .ifPresent(this::delete);
 
         }
     }
 
-    private boolean hashChildren(Comment comment) {
+    private boolean hasChildren(Comment comment) {
         return commentRepository.countBy(comment.getArticleId(), comment.getCommentId(), 2L) == 2;
 
     }
