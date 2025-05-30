@@ -1,6 +1,8 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'p6spy:p6spy:3.9.1'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation project(':common:snowflake')
 }
