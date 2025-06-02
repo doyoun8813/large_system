@@ -17,10 +17,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
 # P6Spy 설정
 decorator:
   datasource:
