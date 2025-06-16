@@ -24,7 +24,7 @@ public class CommentClient {
         restClient = RestClient.create(commentServiceUrl);
     }
 
-    public long read(Long articleId) {
+    public long count(Long articleId) {
         try {
             return restClient.get()
                     .uri("/v2/comments/articles/{articleId}/count", articleId)
