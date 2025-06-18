@@ -19,6 +19,8 @@ public class Outbox {
     private Long outboxId;
     @Enumerated(EnumType.STRING)
     private EventType eventType;
+    // TODO 컬럼 어노테이션 없으니까 앱 시작할 때 마다 varchar(255)로 자동 설정되어서 에러
+    @Column(columnDefinition = "TEXT")
     private String payload;
     private Long shardKey;
     private LocalDateTime createdAt;
